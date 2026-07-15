@@ -4,170 +4,201 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Desa Gatakarsa - KKN UPN Veteran Yogyakarta</title>
-    <!-- Google Fonts untuk tipografi yang lebih modern -->
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <!-- Google Fonts: Fraunces untuk judul (karakter hangat, organik), Poppins untuk isi -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,500&display=swap" rel="stylesheet">
     <!-- FontAwesome untuk Ikon -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    
+
     <style>
-        /* === VARIABEL WARNA & RESET === */
+        /* === VARIABEL WARNA & TIPOGRAFI === */
         :root {
-            --primary-color: #2E7D32; /* Hijau alam */
-            --secondary-color: #F9A826; /* Kuning aksen */
-            --text-dark: #333333;
+            --primary-color: #2E7D32;   /* Hijau alam */
+            --primary-dark: #1B4332;    /* Hijau tua, untuk teks/aksen gelap */
+            --secondary-color: #F9A826; /* Kuning panen */
+            --cream: #FBF8F2;           /* Latar hangat, bukan abu netral */
+            --text-dark: #2A2A28;
+            --text-muted: #6b6b64;
             --text-light: #f4f4f4;
-            --bg-light: #f9f9f9;
+            --bg-light: var(--cream);
+            --font-display: 'Fraunces', serif;
+            --font-body: 'Poppins', sans-serif;
         }
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Poppins', sans-serif;
-            scroll-behavior: smooth;
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: var(--font-body); scroll-behavior: smooth; }
+        body { color: var(--text-dark); background-color: var(--bg-light); line-height: 1.7; }
 
-        body { color: var(--text-dark); background-color: var(--bg-light); line-height: 1.6; }
+        h1, h2, h3 { font-family: var(--font-display); font-weight: 600; }
+
+        .eyebrow {
+            display: inline-flex; align-items: center; gap: 8px;
+            font-size: 0.78rem; font-weight: 700; letter-spacing: 3px; text-transform: uppercase;
+            color: var(--secondary-color);
+        }
+        .eyebrow::before { content: ''; width: 22px; height: 2px; background: var(--secondary-color); display: inline-block; }
 
         /* === NAVBAR === */
         header nav {
-            position: fixed;
-            top: 0;
-            width: 100%;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 20px 50px;
-            background: transparent;
-            transition: all 0.4s ease;
-            z-index: 1000;
+            position: fixed; top: 0; width: 100%;
+            display: flex; justify-content: space-between; align-items: center;
+            padding: 22px 50px; background: transparent; transition: all 0.4s ease; z-index: 1000;
         }
-
-        header nav.scrolled {
-            background: white;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-            padding: 15px 50px;
-        }
+        header nav.scrolled { background: rgba(251,248,242,0.95); backdrop-filter: blur(6px); box-shadow: 0 4px 20px rgba(0,0,0,0.08); padding: 14px 50px; }
 
         .logo { display: flex; align-items: center; gap: 10px; }
-        .logo img { width: 40px; height: 40px; border-radius: 50%; object-fit: cover; }
-        .logo h2 { color: white; transition: 0.4s; font-size: 1.5rem; }
-        header nav.scrolled .logo h2 { color: var(--primary-color); }
+        .logo img { width: 40px; height: 40px; border-radius: 50%; object-fit: cover; border: 2px solid rgba(255,255,255,0.6); }
+        .logo h2 { color: white; transition: 0.4s; font-size: 1.4rem; letter-spacing: 0.5px; }
+        header nav.scrolled .logo img { border-color: var(--secondary-color); }
+        header nav.scrolled .logo h2 { color: var(--primary-dark); }
 
-        nav ul { display: flex; list-style: none; gap: 20px; }
+        nav ul { display: flex; list-style: none; gap: 28px; align-items: center; }
         nav ul li a {
-            text-decoration: none;
-            color: white;
-            font-weight: 600;
-            transition: 0.3s;
-            position: relative;
+            text-decoration: none; color: white; font-weight: 600; font-size: 0.95rem;
+            transition: 0.3s; position: relative;
         }
         header nav.scrolled ul li a { color: var(--text-dark); }
-        
         nav ul li a::after {
             content: ''; position: absolute; width: 0; height: 2px;
-            bottom: -5px; left: 0; background-color: var(--secondary-color);
-            transition: width 0.3s ease;
+            bottom: -6px; left: 0; background-color: var(--secondary-color); transition: width 0.3s ease;
         }
         nav ul li a:hover::after { width: 100%; }
+        nav ul li a.nav-cta {
+            background: var(--secondary-color); color: var(--text-dark) !important; padding: 8px 18px; border-radius: 20px;
+        }
+        nav ul li a.nav-cta::after { display: none; }
+        nav ul li a.nav-cta:hover { background: var(--primary-color); color: white !important; }
 
         /* === HERO SECTION === */
         .hero {
-            height: 100vh;
-            /* Placeholder background jika gambar belum ada */
-            background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('https://source.unsplash.com/1600x900/?village,nature,ricefield') center/cover;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
-            color: white;
+            height: 100vh; min-height: 640px; position: relative;
+            background:
+                linear-gradient(180deg, rgba(10,30,15,0.55) 0%, rgba(10,30,15,0.35) 40%, rgba(10,20,12,0.85) 100%),
+                url('https://images.unsplash.com/photo-1729778721407-46e81816a2a7?fm=jpg&q=80&w=2000&auto=format&fit=crop') center/cover no-repeat;
+            display: flex; flex-direction: column; justify-content: center; align-items: center;
+            text-align: center; color: white; overflow: hidden;
+        }
+        .hero .overlay { max-width: 720px; padding: 0 20px; }
+        .hero .eyebrow { color: var(--secondary-color); margin-bottom: 18px; opacity: 0; animation: fadeIn 1s ease forwards; animation-delay: 0.1s; }
+        .hero h1 {
+            font-size: 3.6rem; margin-bottom: 16px; line-height: 1.15; font-weight: 600;
+            animation: slideDown 1s ease forwards;
+        }
+        .hero h1 em { font-style: italic; color: var(--secondary-color); font-weight: 500; }
+        .hero p { font-family: var(--font-body); font-size: 1.15rem; margin-bottom: 34px; font-weight: 300; color: rgba(255,255,255,0.9); animation: slideUp 1s ease forwards; animation-delay: 0.3s; opacity: 0; }
+
+        .hero-actions { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; opacity: 0; animation: fadeIn 1s ease forwards; animation-delay: 0.6s; }
+
+        .btn {
+            padding: 13px 32px; background: var(--primary-color); color: white; text-decoration: none;
+            border-radius: 25px; font-weight: 600; transition: 0.3s; display: inline-block; border: 2px solid var(--primary-color);
+        }
+        .btn:hover { background: var(--secondary-color); border-color: var(--secondary-color); color: var(--text-dark); transform: translateY(-3px); box-shadow: 0 8px 20px rgba(0,0,0,0.25); }
+
+        .btn-outline { background: transparent; border: 2px solid rgba(255,255,255,0.8); color: white; }
+        .btn-outline:hover { background: white; border-color: white; color: var(--primary-dark); }
+
+        .btn-small {
+            display: inline-block; margin-top: 10px; padding: 6px 15px;
+            background: var(--secondary-color); color: var(--text-dark); text-decoration: none;
+            border-radius: 20px; font-size: 0.8rem; font-weight: 600; transition: 0.3s;
+        }
+        .btn-small:hover { background: var(--primary-color); color: white; transform: translateY(-2px); }
+
+        .scroll-cue {
+            position: absolute; bottom: 55px; left: 50%; transform: translateX(-50%);
+            color: white; font-size: 1.4rem; opacity: 0.8; animation: bounce 2s infinite;
         }
 
-        .hero h1 { font-size: 3.5rem; margin-bottom: 10px; text-transform: uppercase; letter-spacing: 2px; animation: slideDown 1s ease forwards;}
-        .hero p { font-size: 1.2rem; margin-bottom: 30px; animation: slideUp 1s ease forwards; animation-delay: 0.3s; opacity: 0; }
-        
-        .btn {
-            padding: 12px 30px;
-            background: var(--primary-color);
-            color: white;
-            text-decoration: none;
-            border-radius: 25px;
-            font-weight: 600;
-            transition: 0.3s;
-            display: inline-block;
-            opacity: 0;
-            animation: fadeIn 1s ease forwards;
-            animation-delay: 0.6s;
-        }
-        .btn:hover { background: var(--secondary-color); color: var(--text-dark); transform: translateY(-3px); box-shadow: 0 5px 15px rgba(0,0,0,0.2); }
-        
-        .btn-small {
-            display: inline-block;
-            margin-top: 10px;
-            padding: 6px 15px; /* Angka ini diperkecil agar kotaknya menyusut */
-            background: var(--secondary-color);
-            color: var(--text-dark);
-            text-decoration: none;
-            border-radius: 20px;
-            font-size: 0.8rem; /* Hurufnya diperkecil sedikit */
-            font-weight: 600;
-            transition: 0.3s;
-        }
-        .btn-small:hover {
-            background: var(--primary-color);
-            color: white;
-            transform: translateY(-2px);
-        }
+        /* Pembatas bukit di bawah hero, menandai lembah perbukitan Menoreh */
+        .hill-divider { position: absolute; bottom: -1px; left: 0; width: 100%; line-height: 0; }
+        .hill-divider svg { width: 100%; height: 90px; display: block; }
+
         /* === SECTIONS UMUM === */
-        section { padding: 80px 10%; }
-        h2 { text-align: center; font-size: 2.5rem; margin-bottom: 50px; color: var(--primary-color); position: relative; }
-        h2::after {
-            content: ''; width: 80px; height: 3px; background: var(--secondary-color);
-            position: absolute; bottom: -10px; left: 50%; transform: translateX(-50%);
-        }
+        section { padding: 100px 10%; }
+        .section-head { text-align: center; max-width: 640px; margin: 0 auto 55px; }
+        .section-head .eyebrow { margin-bottom: 12px; color: var(--primary-color); }
+        .section-head .eyebrow::before { background: var(--primary-color); }
+        h2 { font-size: 2.4rem; color: var(--primary-dark); }
 
         /* === TENTANG DESA === */
-        .about-content { display: flex; gap: 40px; align-items: center; }
-        .about-content img { width: 40%; border-radius: 15px; box-shadow: 0 10px 20px rgba(0,0,0,0.1); transition: 0.3s; }
-        .about-content img:hover { transform: scale(1.02); }
-        .about-content div { width: 60%; }
-        .about-content p { margin-bottom: 15px; text-align: justify; }
+        .about-content { display: flex; gap: 60px; align-items: center; }
+        .about-img-wrap { width: 42%; position: relative; }
+        .about-img-wrap::before {
+            content: ''; position: absolute; top: 22px; left: -22px; width: 100%; height: 100%;
+            background: var(--secondary-color); border-radius: 15px; z-index: 0;
+        }
+        .about-content img { position: relative; z-index: 1; width: 100%; display: block; border-radius: 15px; box-shadow: 0 15px 30px rgba(0,0,0,0.15); transition: 0.3s; }
+        .about-content img:hover { transform: translateY(-4px); }
+        .about-content .about-text { width: 58%; }
+        .about-text > p:first-of-type { margin-bottom: 20px; color: var(--text-muted); }
+
+        .info-list { display: flex; flex-direction: column; gap: 18px; margin: 24px 0; }
+        .info-item { display: flex; gap: 16px; align-items: flex-start; }
+        .info-item .icon-box {
+            flex-shrink: 0; width: 42px; height: 42px; border-radius: 10px;
+            background: rgba(46,125,50,0.1); color: var(--primary-color);
+            display: flex; align-items: center; justify-content: center; font-size: 1.05rem;
+        }
+        .info-item h4 { font-family: var(--font-body); font-size: 0.95rem; font-weight: 700; color: var(--primary-dark); margin-bottom: 3px; }
+        .info-item p { font-size: 0.92rem; color: var(--text-muted); }
+
+        .tagline { font-style: italic; color: var(--primary-dark); border-left: 3px solid var(--secondary-color); padding-left: 16px; margin-top: 10px; }
 
         /* === POTENSI DESA (KARTU) === */
         .cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; }
         .card {
-            background: white; padding: 30px; border-radius: 15px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.05); text-align: center;
-            transition: 0.4s ease; border-bottom: 5px solid transparent;
+            background: white; padding: 40px 30px; border-radius: 18px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.05); text-align: center;
+            transition: 0.4s ease; border-bottom: 4px solid transparent;
         }
-        .card i { font-size: 3rem; color: var(--primary-color); margin-bottom: 20px; }
-        .card:hover { transform: translateY(-10px); box-shadow: 0 15px 30px rgba(0,0,0,0.1); border-bottom: 5px solid var(--secondary-color); }
-        .card h3 { margin-bottom: 15px; }
+        .card .icon-circle {
+            width: 72px; height: 72px; border-radius: 50%; margin: 0 auto 22px;
+            background: rgba(46,125,50,0.1); display: flex; align-items: center; justify-content: center;
+            transition: 0.4s ease;
+        }
+        .card i { font-size: 1.9rem; color: var(--primary-color); }
+        .card:hover { transform: translateY(-10px); box-shadow: 0 20px 35px rgba(0,0,0,0.1); border-bottom: 4px solid var(--secondary-color); }
+        .card:hover .icon-circle { background: var(--secondary-color); }
+        .card:hover .icon-circle i { color: var(--text-dark); }
+        .card h3 { margin-bottom: 12px; font-size: 1.25rem; color: var(--primary-dark); }
+        .card p { color: var(--text-muted); font-size: 0.95rem; }
 
         /* === GALERI === */
-        .gallery-grid {
-            display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 15px;
+        .gallery-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 16px; }
+        .gallery-item { position: relative; border-radius: 12px; overflow: hidden; cursor: pointer; }
+        .gallery-item img { width: 100%; height: 220px; object-fit: cover; display: block; transition: 0.5s ease; }
+        .gallery-item:hover img { transform: scale(1.08); }
+        .gallery-item::after {
+            content: ''; position: absolute; inset: 0;
+            background: linear-gradient(180deg, transparent 50%, rgba(0,0,0,0.55) 100%);
+            opacity: 0; transition: 0.3s;
         }
-        .gallery-grid img {
-            width: 100%; height: 200px; object-fit: cover; border-radius: 10px;
-            transition: 0.3s; cursor: pointer; filter: brightness(80%);
-        }
-        .gallery-grid img:hover { filter: brightness(110%); transform: scale(1.05); box-shadow: 0 10px 20px rgba(0,0,0,0.2); }
+        .gallery-item:hover::after { opacity: 1; }
 
         /* === STATISTIK === */
-        .stats { background: var(--primary-color); color: white; display: flex; justify-content: space-around; flex-wrap: wrap; text-align: center; padding: 60px 10%; }
-        .stat-box h3 { font-size: 3.5rem; margin-bottom: 5px; color: var(--secondary-color); }
-        .stat-box p { font-size: 1.2rem; font-weight: 600; text-transform: uppercase; }
+        .stats {
+            background: var(--primary-dark); color: white;
+            display: flex; justify-content: space-around; flex-wrap: wrap; text-align: center; padding: 70px 10%;
+        }
+        .stat-box i { font-size: 1.6rem; color: var(--secondary-color); margin-bottom: 10px; display: block; }
+        .stat-box h3 { font-size: 3.2rem; margin-bottom: 5px; color: white; font-family: var(--font-display); }
+        .stat-box p { font-size: 1rem; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; color: rgba(255,255,255,0.75); font-family: var(--font-body); }
 
         /* === KONTAK === */
-        .contact form { max-width: 600px; margin: 0 auto; display: flex; flex-direction: column; gap: 15px; }
-        .contact input, .contact textarea { width: 100%; padding: 15px; border: 1px solid #ddd; border-radius: 8px; font-size: 1rem; transition: 0.3s; }
-        .contact input:focus, .contact textarea:focus { border-color: var(--primary-color); outline: none; box-shadow: 0 0 8px rgba(46, 125, 50, 0.2); }
-        .contact button { padding: 15px; background: var(--primary-color); color: white; border: none; border-radius: 8px; font-size: 1.1rem; cursor: pointer; transition: 0.3s; font-weight: bold; }
+        .contact { background: white; }
+        .contact form { max-width: 600px; margin: 0 auto; display: flex; flex-direction: column; gap: 16px; }
+        .contact input, .contact textarea {
+            width: 100%; padding: 15px 18px; border: 1.5px solid #e5e2da; border-radius: 10px;
+            font-size: 1rem; transition: 0.3s; background: var(--cream); font-family: var(--font-body);
+        }
+        .contact input:focus, .contact textarea:focus { border-color: var(--primary-color); outline: none; background: white; box-shadow: 0 0 0 4px rgba(46, 125, 50, 0.1); }
+        .contact button {
+            padding: 16px; background: var(--primary-color); color: white; border: none; border-radius: 10px;
+            font-size: 1.05rem; cursor: pointer; transition: 0.3s; font-weight: bold; letter-spacing: 0.3px;
+        }
         .contact button:hover { background: var(--secondary-color); color: var(--text-dark); }
 
         /* === FOOTER === */
-        footer { background: var(--text-dark); color: white; text-align: center; padding: 20px; font-size: 0.9rem; }
+        footer { background: var(--primary-dark); color: rgba(255,255,255,0.8); text-align: center; padding: 26px; font-size: 0.9rem; }
 
         /* === ANIMASI SCROLL (JS) === */
         .reveal { opacity: 0; transform: translateY(50px); transition: all 0.8s ease-in-out; }
@@ -177,15 +208,25 @@
         @keyframes slideDown { from { opacity: 0; transform: translateY(-50px); } to { opacity: 1; transform: translateY(0); } }
         @keyframes slideUp { from { opacity: 0; transform: translateY(50px); } to { opacity: 1; transform: translateY(0); } }
         @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+        @keyframes bounce { 0%, 100% { transform: translate(-50%, 0); } 50% { transform: translate(-50%, -10px); } }
 
         /* === RESPONSIVE === */
         @media (max-width: 768px) {
+            section { padding: 70px 6%; }
             .about-content { flex-direction: column; }
-            .about-content img, .about-content div { width: 100%; }
-            header nav { padding: 20px; flex-direction: column; gap: 15px; background: rgba(0,0,0,0.8); }
-            header nav.scrolled { padding: 20px; }
-            .hero h1 { font-size: 2.2rem; }
+            .about-img-wrap, .about-content .about-text { width: 100%; }
+            .about-img-wrap::before { display: none; }
+            header nav { padding: 18px 20px; }
+            header nav ul { position: fixed; top: 0; right: -100%; height: 100vh; width: 70%; max-width: 300px;
+                background: white; flex-direction: column; justify-content: center; gap: 26px; transition: 0.4s ease; box-shadow: -5px 0 20px rgba(0,0,0,0.1); }
+            header nav ul.open { right: 0; }
+            header nav ul li a { color: var(--text-dark) !important; }
+            .nav-toggle { display: block; background: none; border: none; color: white; font-size: 1.5rem; cursor: pointer; z-index: 1100; }
+            header nav.scrolled .nav-toggle { color: var(--primary-dark); }
+            .hero h1 { font-size: 2.3rem; }
+            .hero p { font-size: 1rem; }
         }
+        @media (min-width: 769px) { .nav-toggle { display: none; } }
     </style>
 </head>
 <body>
@@ -197,13 +238,14 @@
             <img src="images/logo.jpeg" alt="Logo" onerror="this.src='https:'">
             <h2>Gatakarsa</h2>
         </div>
-        <ul>
+        <button class="nav-toggle" id="navToggle" aria-label="Buka menu"><i class="fas fa-bars"></i></button>
+        <ul id="navList">
             <li><a href="#beranda">Beranda</a></li>
             <li><a href="#tentang">Tentang</a></li>
             <li><a href="#potensi">Potensi</a></li>
             <li><a href="#galeri">Galeri</a></li>
             <li><a href="#kontak">Kontak</a></li>
-            <li><a href="https://s.id/dusungatak">s id</a></li>
+            <li><a href="umkm.html" target="_blank" class="nav-cta">Katalog UMKM</a></li>
         </ul>
     </nav>
 </header>
@@ -211,50 +253,95 @@
 <!-- Hero Section -->
 <section class="hero" id="beranda">
     <div class="overlay">
-        <h1>Selamat Datang di Dusun Gatak</h1>
-        <p>Desa Inovatif, Mandiri, dan Berbudaya</p>
-        <a href="#tentang" class="btn">Jelajahi Dusun</a>
+        <span class="eyebrow">Kabupaten Magelang · Jawa Tengah</span>
+        <h1>Selamat Datang di <em>Dusun Gatak</em></h1>
+        <p>Desa Inovatif, Mandiri, dan Berbudaya — di lembah Perbukitan Menoreh.</p>
+        <div class="hero-actions">
+            <a href="#tentang" class="btn">Jelajahi Dusun</a>
+            <a href="umkm.html" target="_blank" class="btn btn-outline">Lihat Katalog UMKM</a>
+        </div>
+    </div>
+    <a href="#tentang" class="scroll-cue" aria-label="Gulir ke bawah"><i class="fas fa-chevron-down"></i></a>
+    <div class="hill-divider">
+        <svg viewBox="0 0 1440 90" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M0,60 C240,10 480,90 720,50 C960,15 1200,70 1440,30 L1440,90 L0,90 Z" fill="#FBF8F2"></path>
+        </svg>
     </div>
 </section>
 
 <!-- Tentang Desa -->
 <section class="about reveal" id="tentang">
-    <h2>Tentang Dusun</h2>
+    <div class="section-head">
+        <span class="eyebrow">Profil Wilayah</span>
+        <h2>Tentang Dusun</h2>
+    </div>
     <div class="about-content">
-        <img src="images/kepaladesa2.jpeg" alt="Kepala Desa" onerror="this.src='https:'">
-        <div>
-            <p><strong>Lokasi Administratif:</strong> Dusun Gatak berada di Desa Plosogede, Kecamatan Ngluwar, Kabupaten Magelang, Jawa Tengah (Koordinat: 7°38'20" LS, 110°15'52" BT).</p>
-            <p><strong>Kondisi Alam:</strong> Terletak di lembah Perbukitan Menoreh dengan topografi dataran hingga perbukitan (ketinggian 200–250 mdpl).</p>
-            <p><strong>Luas & Pemanfaatan:</strong> Memiliki luas sekitar 590 hektare yang mayoritas digunakan untuk pertanian, permukiman, dan fasilitas umum.</p>
-            <p><strong>Pembagian Wilayah:</strong> Terdiri dari 9 dusun, yaitu Gatak, Dongkelan, Druju Kidul, Druju Tegal, Ganjuran, Karang Sanggrahan, Ngemplak, Ploso Kidul, dan Ploso Wetan.</p>
-            <br>
-            <p><i>Dengan semangat gotong royong, Desa Gatakarsa berupaya menjadi desa yang maju dan berkelanjutan.</i></p>
+        <div class="about-img-wrap">
+            <img src="images/kepaladesa2.jpeg" alt="Kepala Desa" onerror="this.src='https:'">
+        </div>
+        <div class="about-text">
+            <p>Dengan semangat gotong royong, Desa Gatakarsa berupaya menjadi desa yang maju dan berkelanjutan, dibangun di atas fondasi wilayah dan sumber daya alam berikut.</p>
+
+            <div class="info-list">
+                <div class="info-item">
+                    <div class="icon-box"><i class="fas fa-map-marker-alt"></i></div>
+                    <div>
+                        <h4>Lokasi Administratif</h4>
+                        <p>Dusun Gatak berada di Desa Plosogede, Kecamatan Ngluwar, Kabupaten Magelang, Jawa Tengah (Koordinat: 7°38'20" LS, 110°15'52" BT).</p>
+                    </div>
+                </div>
+                <div class="info-item">
+                    <div class="icon-box"><i class="fas fa-mountain"></i></div>
+                    <div>
+                        <h4>Kondisi Alam</h4>
+                        <p>Terletak di lembah Perbukitan Menoreh dengan topografi dataran hingga perbukitan (ketinggian 200–250 mdpl).</p>
+                    </div>
+                </div>
+                <div class="info-item">
+                    <div class="icon-box"><i class="fas fa-ruler-combined"></i></div>
+                    <div>
+                        <h4>Luas & Pemanfaatan</h4>
+                        <p>Memiliki luas sekitar 590 hektare yang mayoritas digunakan untuk pertanian, permukiman, dan fasilitas umum.</p>
+                    </div>
+                </div>
+                <div class="info-item">
+                    <div class="icon-box"><i class="fas fa-layer-group"></i></div>
+                    <div>
+                        <h4>Pembagian Wilayah</h4>
+                        <p>Terdiri dari 9 dusun, yaitu Gatak, Dongkelan, Druju Kidul, Druju Tegal, Ganjuran, Karang Sanggrahan, Ngemplak, Ploso Kidul, dan Ploso Wetan.</p>
+                    </div>
+                </div>
+            </div>
+
+            <p class="tagline">Dengan semangat gotong royong, Desa Gatakarsa berupaya menjadi desa yang maju dan berkelanjutan.</p>
         </div>
     </div>
 </section>
 
-<!-- Potensi Desa -->
 <!-- Potensi & Budaya Desa -->
 <section class="potensi reveal" id="potensi">
-    <h2>Potensi & Budaya Dusun</h2>
+    <div class="section-head">
+        <span class="eyebrow">Unggulan Dusun</span>
+        <h2>Potensi & Budaya Dusun</h2>
+    </div>
     <div class="cards">
-        
+
         <div class="card">
-            <i class="fas fa-seedling"></i>
+            <div class="icon-circle"><i class="fas fa-seedling"></i></div>
             <h3>Pertanian</h3>
             <p>Sektor pertanian adalah mata pencaharian utama. Didominasi oleh sawah irigasi untuk komoditas padi, jagung, cabai, dan hortikultura. Didukung tanah subur dan sumber air melimpah.</p>
         </div>
 
         <div class="card">
-            <i class="fas fa-store"></i>
+            <div class="icon-circle"><i class="fas fa-store"></i></div>
             <h3>UMKM</h3>
             <p>Berbagai produk lokal dari tangan-tangan kreatif masyarakat dusun yang mendukung dan menggerakkan roda ekonomi kerakyatan secara mandiri.</p>
             <br>
-            <a href="umkm.html" target="_blank" class="btn-small">Lihat Detail UMKM </i></a>
+            <a href="umkm.html" target="_blank" class="btn-small">Lihat Detail UMKM</a>
         </div>
 
         <div class="card">
-            <i class="fas fa-mountain"></i>
+            <div class="icon-circle"><i class="fas fa-mountain"></i></div>
             <h3>Wisata & Iklim</h3>
             <p>Menawarkan pesona pemandangan alam khas lembah Perbukitan Menoreh serta kebudayaan lokal yang berpotensi menjadi destinasi wisata menarik.</p>
         </div>
@@ -264,34 +351,41 @@
 
 <!-- Galeri -->
 <section class="galeri reveal" id="galeri">
-    <h2>Galeri Kegiatan</h2>
+    <div class="section-head">
+        <span class="eyebrow">Dokumentasi</span>
+        <h2>Galeri Kegiatan</h2>
+    </div>
     <div class="gallery-grid">
-        <img src="images/kegiatan.jpeg" alt="Kegiatan 1" onerror="this.src='https://source.unsplash.com/400x300/?agriculture'">
-        <img src="images/kegiatan1.jpeg" alt="Kegiatan 2" onerror="this.src='https://source.unsplash.com/400x300/?village'">
-        <img src="images/kegiatan2.jpeg" alt="Kegiatan 3" onerror="this.src='https://source.unsplash.com/400x300/?community'">
-        <img src="images/kegiatan3.jpeg" alt="Kegiatan 4" onerror="this.src='https://source.unsplash.com/400x300/?farmers'">
-        <img src="images/kegiatan4.jpeg" alt="Kegiatan 5" onerror="this.src='https://source.unsplash.com/400x300/?nature'">
-        <img src="images/kegiatan7.jpeg" alt="Kegiatan 6" onerror="this.src='https://source.unsplash.com/400x300/?event'">
-        <img src="images/kegiatan6.jpeg" alt="Kegiatan 6" onerror="this.src='https://source.unsplash.com/400x300/?event'">
-        <img src="images/kegiatan5.jpeg" alt="Kegiatan 6" onerror="this.src='https://source.unsplash.com/400x300/?event'">
+        <div class="gallery-item"><img src="images/kegiatan.jpeg" alt="Kegiatan 1" onerror="this.src='https://images.unsplash.com/photo-1500937386664-56d1dfef3854?q=80&w=800&auto=format&fit=crop'"></div>
+        <div class="gallery-item"><img src="images/kegiatan1.jpeg" alt="Kegiatan 2" onerror="this.src='https://images.unsplash.com/photo-1500937386664-56d1dfef3854?q=80&w=800&auto=format&fit=crop'"></div>
+        <div class="gallery-item"><img src="images/kegiatan2.jpeg" alt="Kegiatan 3" onerror="this.src='https://images.unsplash.com/photo-1500937386664-56d1dfef3854?q=80&w=800&auto=format&fit=crop'"></div>
+        <div class="gallery-item"><img src="images/kegiatan3.jpeg" alt="Kegiatan 4" onerror="this.src='https://images.unsplash.com/photo-1500937386664-56d1dfef3854?q=80&w=800&auto=format&fit=crop'"></div>
+        <div class="gallery-item"><img src="images/kegiatan4.jpeg" alt="Kegiatan 5" onerror="this.src='https://images.unsplash.com/photo-1500937386664-56d1dfef3854?q=80&w=800&auto=format&fit=crop'"></div>
+        <div class="gallery-item"><img src="images/kegiatan7.jpeg" alt="Kegiatan 6" onerror="this.src='https://images.unsplash.com/photo-1500937386664-56d1dfef3854?q=80&w=800&auto=format&fit=crop'"></div>
+        <div class="gallery-item"><img src="images/kegiatan6.jpeg" alt="Kegiatan 7" onerror="this.src='https://images.unsplash.com/photo-1500937386664-56d1dfef3854?q=80&w=800&auto=format&fit=crop'"></div>
+        <div class="gallery-item"><img src="images/kegiatan5.jpeg" alt="Kegiatan 8" onerror="this.src='https://images.unsplash.com/photo-1500937386664-56d1dfef3854?q=80&w=800&auto=format&fit=crop'"></div>
     </div>
 </section>
 
 <!-- Statistik -->
 <section class="stats" id="statistik">
     <div class="stat-box">
+        <i class="fas fa-users"></i>
         <h3 class="counter" data-target="412">0</h3>
         <p>Jumlah Penduduk</p>
     </div>
     <div class="stat-box">
+        <i class="fas fa-house"></i>
         <h3 class="counter" data-target="4">0</h3>
         <p>RT</p>
     </div>
     <div class="stat-box">
+        <i class="fas fa-store"></i>
         <h3 class="counter" data-target="8">0</h3>
         <p>UMKM Aktif</p>
     </div>
     <div class="stat-box">
+        <i class="fas fa-list-check"></i>
         <h3 class="counter" data-target="5">0</h3>
         <p>Program Dusun</p>
     </div>
@@ -299,7 +393,10 @@
 
 <!-- Kontak -->
 <section class="contact reveal" id="kontak">
-    <h2>Hubungi Kami</h2>
+    <div class="section-head">
+        <span class="eyebrow">Sampaikan Pesan</span>
+        <h2>Hubungi Kami</h2>
+    </div>
     <form>
         <input type="text" placeholder="Nama Lengkap" required>
         <input type="email" placeholder="Alamat Email" required>
@@ -322,6 +419,12 @@
             navbar.classList.remove("scrolled");
         }
     });
+
+    // 1b. Toggle menu mobile
+    const navToggle = document.getElementById("navToggle");
+    const navList = document.getElementById("navList");
+    navToggle.addEventListener("click", () => navList.classList.toggle("open"));
+    navList.querySelectorAll("a").forEach(a => a.addEventListener("click", () => navList.classList.remove("open")));
 
     // 2. Animasi Muncul Saat Scroll (Scroll Reveal)
     function reveal() {
@@ -354,7 +457,7 @@
                     const target = +counter.getAttribute('data-target');
                     const count = +counter.innerText;
                     // Tentukan kecepatan hitung
-                    const inc = target / 50; 
+                    const inc = target / 50;
 
                     if (count < target) {
                         counter.innerText = Math.ceil(count + inc);
