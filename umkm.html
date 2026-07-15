@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Katalog UMKM - Desa Gatakarsa</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
+    <style>
+        :root {
+            --primary-color: #2E7D32; 
+            --secondary-color: #F9A826; 
+            --text-dark: #333333;
+            --bg-light: #f9f9f9;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; }
+        body { color: var(--text-dark); background-color: var(--bg-light); line-height: 1.6; }
+
+        /* Navbar Sederhana */
+        header { background: var(--primary-color); padding: 15px 50px; display: flex; justify-content: space-between; align-items: center; color: white; }
+        .logo { display: flex; align-items: center; gap: 10px; font-size: 1.2rem; font-weight: bold; }
+        .btn-back { color: white; text-decoration: none; font-weight: 600; display: flex; align-items: center; gap: 8px; transition: 0.3s; }
+        .btn-back:hover { color: var(--secondary-color); }
+
+        /* Header UMKM */
+        .umkm-header { text-align: center; padding: 60px 20px; background: white; border-bottom: 2px solid #ddd; }
+        .umkm-header h1 { color: var(--primary-color); font-size: 2.5rem; }
+        .umkm-header p { max-width: 600px; margin: 10px auto; color: #555; }
+
+        /* Grid Katalog UMKM */
+        .katalog-container { padding: 50px 10%; display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; }
+        
+        .umkm-card { background: white; border-radius: 15px; overflow: hidden; box-shadow: 0 5px 15px rgba(0,0,0,0.1); transition: 0.3s; }
+        .umkm-card:hover { transform: translateY(-5px); box-shadow: 0 10px 25px rgba(0,0,0,0.15); }
+        .umkm-img { width: 100%; height: 200px; object-fit: cover; }
+        
+        .umkm-info { padding: 20px; }
+        .umkm-info h3 { color: var(--primary-color); margin-bottom: 10px; }
+        .umkm-info p { font-size: 0.9rem; margin-bottom: 15px; color: #666; }
+        
+        .btn-hubungi { display: block; text-align: center; background: var(--secondary-color); color: var(--text-dark); padding: 10px; border-radius: 8px; text-decoration: none; font-weight: bold; transition: 0.3s; }
+        .btn-hubungi:hover { background: var(--primary-color); color: white; }
+
+        footer { background: var(--text-dark); color: white; text-align: center; padding: 20px; margin-top: 40px; font-size: 0.9rem; }
+    </style>
+</head>
+<body>
+
+    <!-- Navbar -->
+    <header>
+        <div class="logo"><i class="fas fa-store"></i> UMKM Gatakarsa</div>
+        <!-- Tombol untuk kembali ke tab halaman utama -->
+        <a href="javascript:window.close();" class="btn-back"><i class="fas fa-arrow-left"></i> Kembali</a>
+    </header>
+
+    <!-- Header Halaman -->
+    <div class="umkm-header">
+        <h1>Katalog UMKM Dusun Gatak</h1>
+        <p>Mendukung roda perekonomian desa melalui produk-produk unggulan karya tangan kreatif warga Dusun Gatak.</p>
+    </div>
+
+    <!-- Katalog Produk -->
+    <div class="katalog-container">
+        
+        <!-- Contoh UMKM 1 -->
+        <div class="umkm-card">
+            <img src="images/sws.jpeg" alt="Produk UMKM 1" class="umkm-img" onerror="this.src='https://source.unsplash.com/400x300/?food,snack'">
+            <div class="umkm-info">
+                <h3>Rengginang SWS</h3>
+                <p>Cemilan rengginang renyah dan gurih khas Dusun Gatak yang terbuat dari beras ketan pilihan. Digoreng mekar dengan bumbu tradisional yang meresap sempurna.</p>
+                <!-- Ganti URL pada href dengan link Google Maps UMKM ini -->
+                <a href="https://maps.google.com/?q=Lokasi+Rengginang+SWS" target="_blank" class="btn-maps"><i class="fas fa-map-marker-alt"></i> Lihat Lokasi</a>
+            </div>
+        </div>
+    
+        <!-- Contoh UMKM 2 -->
+        <div class="umkm-card">
+            <img src="images/smr.jpeg" alt="Produk UMKM 2" class="umkm-img" onerror="this.src='https://source.unsplash.com/400x300/?craft,bamboo'">
+            <div class="umkm-info">
+                <h3>Rengginang SMR</h3>
+                <p>Rengginang tradisional dengan cita rasa autentik dan tekstur yang super renyah. Tersedia dalam berbagai varian rasa favorit seperti terasi, bawang, dan original..</p>
+                <!-- Ganti URL pada href dengan link Google Maps UMKM ini -->
+                <a href="https://maps.google.com/?q=Lokasi+Rengginang+SMR" target="_blank" class="btn-maps"><i class="fas fa-map-marker-alt"></i> Lihat Lokasi</a>
+            </div>
+        </div>
+    
+        <!-- Contoh UMKM 3 -->
+        <div class="umkm-card">
+            <img src="images/beras.jpeg" alt="Produk UMKM 3" class="umkm-img" onerror="this.src='https://source.unsplash.com/400x300/?farming,vegetables'">
+            <div class="umkm-info">
+                <h3>Agen Beras</h3>
+                <p>Pusat grosir dan eceran yang menyediakan berbagai jenis beras berkualitas tinggi, pulen, dan bersih untuk kebutuhan rumah tangga maupun usaha kuliner Anda.</p>
+                <!-- Ganti URL pada href dengan link Google Maps UMKM ini -->
+                <a href="https://maps.app.goo.gl/g7f6mRoMxqEBiDwx6" target="_blank" class="btn-maps"><i class="fas fa-map-marker-alt"></i> Lihat Lokasi</a>
+            </div>
+        </div>
+    
+    </div>
+
+    <footer>
+        <p>© 2026 Desa Gatakarsa | KKN UPN Veteran Yogyakarta</p>
+    </footer>
+
+</body>
+</html>

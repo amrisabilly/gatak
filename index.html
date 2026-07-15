@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Desa Gatakarsa - KKN UPN Veteran Yogyakarta</title>
+    <!-- Google Fonts untuk tipografi yang lebih modern -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <!-- FontAwesome untuk Ikon -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
+    <style>
+        /* === VARIABEL WARNA & RESET === */
+        :root {
+            --primary-color: #2E7D32; /* Hijau alam */
+            --secondary-color: #F9A826; /* Kuning aksen */
+            --text-dark: #333333;
+            --text-light: #f4f4f4;
+            --bg-light: #f9f9f9;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+            scroll-behavior: smooth;
+        }
+
+        body { color: var(--text-dark); background-color: var(--bg-light); line-height: 1.6; }
+
+        /* === NAVBAR === */
+        header nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 50px;
+            background: transparent;
+            transition: all 0.4s ease;
+            z-index: 1000;
+        }
+
+        header nav.scrolled {
+            background: white;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            padding: 15px 50px;
+        }
+
+        .logo { display: flex; align-items: center; gap: 10px; }
+        .logo img { width: 40px; height: 40px; border-radius: 50%; object-fit: cover; }
+        .logo h2 { color: white; transition: 0.4s; font-size: 1.5rem; }
+        header nav.scrolled .logo h2 { color: var(--primary-color); }
+
+        nav ul { display: flex; list-style: none; gap: 20px; }
+        nav ul li a {
+            text-decoration: none;
+            color: white;
+            font-weight: 600;
+            transition: 0.3s;
+            position: relative;
+        }
+        header nav.scrolled ul li a { color: var(--text-dark); }
+        
+        nav ul li a::after {
+            content: ''; position: absolute; width: 0; height: 2px;
+            bottom: -5px; left: 0; background-color: var(--secondary-color);
+            transition: width 0.3s ease;
+        }
+        nav ul li a:hover::after { width: 100%; }
+
+        /* === HERO SECTION === */
+        .hero {
+            height: 100vh;
+            /* Placeholder background jika gambar belum ada */
+            background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('https://source.unsplash.com/1600x900/?village,nature,ricefield') center/cover;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            color: white;
+        }
+
+        .hero h1 { font-size: 3.5rem; margin-bottom: 10px; text-transform: uppercase; letter-spacing: 2px; animation: slideDown 1s ease forwards;}
+        .hero p { font-size: 1.2rem; margin-bottom: 30px; animation: slideUp 1s ease forwards; animation-delay: 0.3s; opacity: 0; }
+        
+        .btn {
+            padding: 12px 30px;
+            background: var(--primary-color);
+            color: white;
+            text-decoration: none;
+            border-radius: 25px;
+            font-weight: 600;
+            transition: 0.3s;
+            display: inline-block;
+            opacity: 0;
+            animation: fadeIn 1s ease forwards;
+            animation-delay: 0.6s;
+        }
+        .btn:hover { background: var(--secondary-color); color: var(--text-dark); transform: translateY(-3px); box-shadow: 0 5px 15px rgba(0,0,0,0.2); }
+        
+        .btn-small {
+            display: inline-block;
+            margin-top: 10px;
+            padding: 6px 15px; /* Angka ini diperkecil agar kotaknya menyusut */
+            background: var(--secondary-color);
+            color: var(--text-dark);
+            text-decoration: none;
+            border-radius: 20px;
+            font-size: 0.8rem; /* Hurufnya diperkecil sedikit */
+            font-weight: 600;
+            transition: 0.3s;
+        }
+        .btn-small:hover {
+            background: var(--primary-color);
+            color: white;
+            transform: translateY(-2px);
+        }
+        /* === SECTIONS UMUM === */
+        section { padding: 80px 10%; }
+        h2 { text-align: center; font-size: 2.5rem; margin-bottom: 50px; color: var(--primary-color); position: relative; }
+        h2::after {
+            content: ''; width: 80px; height: 3px; background: var(--secondary-color);
+            position: absolute; bottom: -10px; left: 50%; transform: translateX(-50%);
+        }
+
+        /* === TENTANG DESA === */
+        .about-content { display: flex; gap: 40px; align-items: center; }
+        .about-content img { width: 40%; border-radius: 15px; box-shadow: 0 10px 20px rgba(0,0,0,0.1); transition: 0.3s; }
+        .about-content img:hover { transform: scale(1.02); }
+        .about-content div { width: 60%; }
+        .about-content p { margin-bottom: 15px; text-align: justify; }
+
+        /* === POTENSI DESA (KARTU) === */
+        .cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; }
+        .card {
+            background: white; padding: 30px; border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05); text-align: center;
+            transition: 0.4s ease; border-bottom: 5px solid transparent;
+        }
+        .card i { font-size: 3rem; color: var(--primary-color); margin-bottom: 20px; }
+        .card:hover { transform: translateY(-10px); box-shadow: 0 15px 30px rgba(0,0,0,0.1); border-bottom: 5px solid var(--secondary-color); }
+        .card h3 { margin-bottom: 15px; }
+
+        /* === GALERI === */
+        .gallery-grid {
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 15px;
+        }
+        .gallery-grid img {
+            width: 100%; height: 200px; object-fit: cover; border-radius: 10px;
+            transition: 0.3s; cursor: pointer; filter: brightness(80%);
+        }
+        .gallery-grid img:hover { filter: brightness(110%); transform: scale(1.05); box-shadow: 0 10px 20px rgba(0,0,0,0.2); }
+
+        /* === STATISTIK === */
+        .stats { background: var(--primary-color); color: white; display: flex; justify-content: space-around; flex-wrap: wrap; text-align: center; padding: 60px 10%; }
+        .stat-box h3 { font-size: 3.5rem; margin-bottom: 5px; color: var(--secondary-color); }
+        .stat-box p { font-size: 1.2rem; font-weight: 600; text-transform: uppercase; }
+
+        /* === KONTAK === */
+        .contact form { max-width: 600px; margin: 0 auto; display: flex; flex-direction: column; gap: 15px; }
+        .contact input, .contact textarea { width: 100%; padding: 15px; border: 1px solid #ddd; border-radius: 8px; font-size: 1rem; transition: 0.3s; }
+        .contact input:focus, .contact textarea:focus { border-color: var(--primary-color); outline: none; box-shadow: 0 0 8px rgba(46, 125, 50, 0.2); }
+        .contact button { padding: 15px; background: var(--primary-color); color: white; border: none; border-radius: 8px; font-size: 1.1rem; cursor: pointer; transition: 0.3s; font-weight: bold; }
+        .contact button:hover { background: var(--secondary-color); color: var(--text-dark); }
+
+        /* === FOOTER === */
+        footer { background: var(--text-dark); color: white; text-align: center; padding: 20px; font-size: 0.9rem; }
+
+        /* === ANIMASI SCROLL (JS) === */
+        .reveal { opacity: 0; transform: translateY(50px); transition: all 0.8s ease-in-out; }
+        .reveal.active { opacity: 1; transform: translateY(0); }
+
+        /* === KEYFRAMES === */
+        @keyframes slideDown { from { opacity: 0; transform: translateY(-50px); } to { opacity: 1; transform: translateY(0); } }
+        @keyframes slideUp { from { opacity: 0; transform: translateY(50px); } to { opacity: 1; transform: translateY(0); } }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+
+        /* === RESPONSIVE === */
+        @media (max-width: 768px) {
+            .about-content { flex-direction: column; }
+            .about-content img, .about-content div { width: 100%; }
+            header nav { padding: 20px; flex-direction: column; gap: 15px; background: rgba(0,0,0,0.8); }
+            header nav.scrolled { padding: 20px; }
+            .hero h1 { font-size: 2.2rem; }
+        }
+    </style>
+</head>
+<body>
+
+<!-- Navbar -->
+<header>
+    <nav id="navbar">
+        <div class="logo">
+            <img src="images/logo.jpeg" alt="Logo" onerror="this.src='https:'">
+            <h2>Gatakarsa</h2>
+        </div>
+        <ul>
+            <li><a href="#beranda">Beranda</a></li>
+            <li><a href="#tentang">Tentang</a></li>
+            <li><a href="#potensi">Potensi</a></li>
+            <li><a href="#galeri">Galeri</a></li>
+            <li><a href="#kontak">Kontak</a></li>
+            <li><a href="https://s.id/dusungatak">s id</a></li>
+        </ul>
+    </nav>
+</header>
+
+<!-- Hero Section -->
+<section class="hero" id="beranda">
+    <div class="overlay">
+        <h1>Selamat Datang di Dusun Gatak</h1>
+        <p>Desa Inovatif, Mandiri, dan Berbudaya</p>
+        <a href="#tentang" class="btn">Jelajahi Dusun</a>
+    </div>
+</section>
+
+<!-- Tentang Desa -->
+<section class="about reveal" id="tentang">
+    <h2>Tentang Dusun</h2>
+    <div class="about-content">
+        <img src="images/kepaladesa2.jpeg" alt="Kepala Desa" onerror="this.src='https:'">
+        <div>
+            <p><strong>Lokasi Administratif:</strong> Dusun Gatak berada di Desa Plosogede, Kecamatan Ngluwar, Kabupaten Magelang, Jawa Tengah (Koordinat: 7°38'20" LS, 110°15'52" BT).</p>
+            <p><strong>Kondisi Alam:</strong> Terletak di lembah Perbukitan Menoreh dengan topografi dataran hingga perbukitan (ketinggian 200–250 mdpl).</p>
+            <p><strong>Luas & Pemanfaatan:</strong> Memiliki luas sekitar 590 hektare yang mayoritas digunakan untuk pertanian, permukiman, dan fasilitas umum.</p>
+            <p><strong>Pembagian Wilayah:</strong> Terdiri dari 9 dusun, yaitu Gatak, Dongkelan, Druju Kidul, Druju Tegal, Ganjuran, Karang Sanggrahan, Ngemplak, Ploso Kidul, dan Ploso Wetan.</p>
+            <br>
+            <p><i>Dengan semangat gotong royong, Desa Gatakarsa berupaya menjadi desa yang maju dan berkelanjutan.</i></p>
+        </div>
+    </div>
+</section>
+
+<!-- Potensi Desa -->
+<!-- Potensi & Budaya Desa -->
+<section class="potensi reveal" id="potensi">
+    <h2>Potensi & Budaya Dusun</h2>
+    <div class="cards">
+        
+        <div class="card">
+            <i class="fas fa-seedling"></i>
+            <h3>Pertanian</h3>
+            <p>Sektor pertanian adalah mata pencaharian utama. Didominasi oleh sawah irigasi untuk komoditas padi, jagung, cabai, dan hortikultura. Didukung tanah subur dan sumber air melimpah.</p>
+        </div>
+
+        <div class="card">
+            <i class="fas fa-store"></i>
+            <h3>UMKM</h3>
+            <p>Berbagai produk lokal dari tangan-tangan kreatif masyarakat dusun yang mendukung dan menggerakkan roda ekonomi kerakyatan secara mandiri.</p>
+            <br>
+            <a href="umkm.html" target="_blank" class="btn-small">Lihat Detail UMKM </i></a>
+        </div>
+
+        <div class="card">
+            <i class="fas fa-mountain"></i>
+            <h3>Wisata & Iklim</h3>
+            <p>Menawarkan pesona pemandangan alam khas lembah Perbukitan Menoreh serta kebudayaan lokal yang berpotensi menjadi destinasi wisata menarik.</p>
+        </div>
+
+    </div>
+</section>
+
+<!-- Galeri -->
+<section class="galeri reveal" id="galeri">
+    <h2>Galeri Kegiatan</h2>
+    <div class="gallery-grid">
+        <img src="images/kegiatan.jpeg" alt="Kegiatan 1" onerror="this.src='https://source.unsplash.com/400x300/?agriculture'">
+        <img src="images/kegiatan1.jpeg" alt="Kegiatan 2" onerror="this.src='https://source.unsplash.com/400x300/?village'">
+        <img src="images/kegiatan2.jpeg" alt="Kegiatan 3" onerror="this.src='https://source.unsplash.com/400x300/?community'">
+        <img src="images/kegiatan3.jpeg" alt="Kegiatan 4" onerror="this.src='https://source.unsplash.com/400x300/?farmers'">
+        <img src="images/kegiatan4.jpeg" alt="Kegiatan 5" onerror="this.src='https://source.unsplash.com/400x300/?nature'">
+        <img src="images/kegiatan7.jpeg" alt="Kegiatan 6" onerror="this.src='https://source.unsplash.com/400x300/?event'">
+        <img src="images/kegiatan6.jpeg" alt="Kegiatan 6" onerror="this.src='https://source.unsplash.com/400x300/?event'">
+        <img src="images/kegiatan5.jpeg" alt="Kegiatan 6" onerror="this.src='https://source.unsplash.com/400x300/?event'">
+    </div>
+</section>
+
+<!-- Statistik -->
+<section class="stats" id="statistik">
+    <div class="stat-box">
+        <h3 class="counter" data-target="412">0</h3>
+        <p>Jumlah Penduduk</p>
+    </div>
+    <div class="stat-box">
+        <h3 class="counter" data-target="4">0</h3>
+        <p>RT</p>
+    </div>
+    <div class="stat-box">
+        <h3 class="counter" data-target="8">0</h3>
+        <p>UMKM Aktif</p>
+    </div>
+    <div class="stat-box">
+        <h3 class="counter" data-target="5">0</h3>
+        <p>Program Dusun</p>
+    </div>
+</section>
+
+<!-- Kontak -->
+<section class="contact reveal" id="kontak">
+    <h2>Hubungi Kami</h2>
+    <form>
+        <input type="text" placeholder="Nama Lengkap" required>
+        <input type="email" placeholder="Alamat Email" required>
+        <textarea rows="5" placeholder="Tulis pesan Anda di sini..." required></textarea>
+        <button type="submit">Kirim Pesan</button>
+    </form>
+</section>
+
+<footer>
+    <p>© 2026 Desa Gatakarsa | KKN UPN Veteran Yogyakarta</p>
+</footer>
+
+<script>
+    // 1. Efek Navbar Berubah Warna Saat Di-scroll
+    window.addEventListener("scroll", function() {
+        let navbar = document.getElementById("navbar");
+        if (window.scrollY > 50) {
+            navbar.classList.add("scrolled");
+        } else {
+            navbar.classList.remove("scrolled");
+        }
+    });
+
+    // 2. Animasi Muncul Saat Scroll (Scroll Reveal)
+    function reveal() {
+        var reveals = document.querySelectorAll(".reveal");
+        for (var i = 0; i < reveals.length; i++) {
+            var windowHeight = window.innerHeight;
+            var elementTop = reveals[i].getBoundingClientRect().top;
+            var elementVisible = 150;
+            if (elementTop < windowHeight - elementVisible) {
+                reveals[i].classList.add("active");
+            }
+        }
+    }
+    window.addEventListener("scroll", reveal);
+    reveal(); // Trigger saat halaman pertama kali dimuat
+
+    // 3. Efek Angka Bergerak (Counter Animation) pada Statistik
+    const counters = document.querySelectorAll('.counter');
+    let counted = false;
+
+    window.addEventListener('scroll', () => {
+        let statsSection = document.getElementById('statistik');
+        let sectionTop = statsSection.getBoundingClientRect().top;
+        let windowHeight = window.innerHeight;
+
+        // Jalankan animasi jika bagian statistik mulai terlihat di layar
+        if(sectionTop < windowHeight && !counted) {
+            counters.forEach(counter => {
+                const updateCount = () => {
+                    const target = +counter.getAttribute('data-target');
+                    const count = +counter.innerText;
+                    // Tentukan kecepatan hitung
+                    const inc = target / 50; 
+
+                    if (count < target) {
+                        counter.innerText = Math.ceil(count + inc);
+                        setTimeout(updateCount, 30);
+                    } else {
+                        counter.innerText = target;
+                    }
+                };
+                updateCount();
+            });
+            counted = true; // Supaya tidak mengulang dari nol terus saat di-scroll
+        }
+    });
+</script>
+</body>
+</html>
